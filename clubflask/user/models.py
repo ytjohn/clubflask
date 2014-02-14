@@ -7,20 +7,23 @@ from clubflask.database import db, CRUDMixin
 from clubflask.extensions import bcrypt
 
 
-class User(UserMixin, CRUDMixin,  db.Model):
+class User(UserMixin, CRUDMixin, db.Model):
 
     __tablename__ = 'users'
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)  # The hashed password
     created_at = db.Column(db.DateTime(), nullable=False)
-    first_name = db.Column(db.String(30), nullable=True)
-    last_name = db.Column(db.String(30), nullable=True)
+    active = db.Column(db.Boolean())
+    is_admin = db.Column(db.Boolean())
     profile = db.relationship('Profile', backref='user',
                                 lazy='dynamic')
 
+    # these fields I want to remove, which involves dropping the entire database.
+    # first_name = db.Column(db.String(30), nullable= True)
+    # last_name = db.Column(db.String(30), nullable=True)
+
     def __init__(self, username=None, email=None, password=None,
-                first_name=None, last_name=None,
                  active=False, is_admin=False):
         self.username = username
         self.email = email
@@ -29,18 +32,13 @@ class User(UserMixin, CRUDMixin,  db.Model):
         self.active = active
         self.is_admin = is_admin
         self.created_at = dt.datetime.utcnow()
-        self.first_name = first_name
-        self.last_name = last_name
+
 
     def set_password(self, password):
         self.password = bcrypt.generate_password_hash(password)
 
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password, password)
-
-    @property
-    def full_name(self):
-        return "{0} {1}".format(self.first_name, self.last_name)
 
     def __repr__(self):
         return '<User "{username}">'.format(username=self.username)
@@ -52,6 +50,8 @@ class Profile(CRUDMixin, db.Model):
 
 
     # Contact Information
+    first_name = db.Column(db.String(30), nullable=True)
+    last_name = db.Column(db.String(30), nullable=True)
     mobilephone = db.Column(db.String(20), nullable=True)
     homephone = db.Column(db.String(20), nullable=True)
     callsign = db.Column(db.String(10), unique=True, nullable=True)
@@ -61,13 +61,22 @@ class Profile(CRUDMixin, db.Model):
     state = db.Column(db.String(80), unique=False, nullable=True)
     zip = db.Column(db.String(11), unique=False, nullable=True)
     county = db.Column(db.String(30), nullable=True)
-    active = db.Column(db.Boolean())
-    is_admin = db.Column(db.Boolean())
+
 
     privacy = db.relationship('Privacy', backref='profile',
                                 lazy='dynamic')
-    Capabilities = db.relationship('Capabilites', backref='profile',
+    usercapabilities = db.relationship('UserCapabilities', backref='profile',
                                 lazy='dynamic')
+
+    def __init__(self, first_name=None, last_name=None):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    @property
+    def full_name(self):
+        return "{0} {1}".format(self.first_name, self.last_name)
+
+
 
 
 class Privacy(UserMixin, CRUDMixin, db.Model):

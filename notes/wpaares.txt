@@ -6,8 +6,8 @@ http://www.wpaares.org/html/join.html
 Fields:
 form name="LayoutRegion1FORM" action="/scripts/joinWPAares.php
 <input type="text" id="FormsEditField2" name="FirstName" size="21" maxlength="26" style="width: 164px; white-space: pre;
-FirstName
-LastName
+FirstName (part of user class)
+LastName (part of user class)
 Call   # call sign
 Address
 City

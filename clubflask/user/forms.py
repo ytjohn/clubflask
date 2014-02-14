@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import TextField, PasswordField
+from wtforms import TextField, PasswordField, DateField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from .models import User
@@ -35,5 +35,10 @@ class RegisterForm(Form):
 
         self.user = user
         return True
+
+
+class ProfileForm(Form):
+    birthday  = DateField('Your Birthday', format='%m/%d/%y')
+    callsign  = TextField('Call Sign')
 
 

@@ -1,6 +1,8 @@
-Notes I take while developing the program.
+# Development Notes
 
-Goals:
+clubflask is a prototype to build a system for managing the BCARS.org membership roster.
+
+# Goals:
 
 1. Anyone with or without a call sign can register.
 2. Profile to record contact information and privacy preferences.
@@ -12,6 +14,24 @@ Goals:
 8. OAuth style authentication (google/yahoo/twitter/facebook)
 9. Perhaps synchronize login with dokuwiki?
 
+---
 
+# cookiecutter
 
+I found this nice [cookiecutter-flask] that includes things I like: bootstrap template, flask for framework, sqlalchemy
+(admittedly, I haven't used sqlalchemy in a while), a login and registration bit, and Flask-Migrations. I haven't used
+Flask-Migrations, but it looks like the migration capability found in django, which I did like. Essentially, by using this
+cookiecutter-flask script, I get a lot of useful tools right off the bat. Granted, the reason I'm looking at micro-frameworks
+like bottle.py and flask is because I don't need much. But in this case, I'd like to get as much of a running start as
+possible. I'd like to say that this is a weekend project, but I've learned that with a toddler in the house, such things
+are rarely possible.
 
+# Flask-migrations
+
+I'm not too happy with flask-migrations, at least as far as sqlite is concerned. Granted, most of this is because of
+limitations in sqlite, but flask-migrate should be aware of this and let me know it can't do the work. In theory, I should
+be able to change one of my models, then run `manage.py db migrate` followed by `manage.py db upgrade`. But if I'm changing
+columns, the migrate fails with ghastly python errors. I end up having to go into sqlite and drop/recreate the tables by
+hand. However, when I do this, the migrate tool no longer understands the database and freaks out.
+
+So I really can't upgrade my database automatically using this. I can run `manage.py db upgrade --sql` and that
