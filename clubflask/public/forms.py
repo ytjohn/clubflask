@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired
 
 from clubflask.user.models import User
 
+
 class LoginForm(Form):
     username = TextField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])

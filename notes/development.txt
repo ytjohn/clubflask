@@ -1,0 +1,17 @@
+Notes I take while developing the program.
+
+Goals:
+
+1. Anyone with or without a call sign can register.
+2. Profile to record contact information and privacy preferences.
+3. Members can view club roster (and download as spreadsheet or pdf)
+4. Track operating capabilities.
+5. Submit to WPA ARES site (record when submitted, and verify sufficient information for submitting).
+6. Track when payments were made.
+7. Paypal/Google Checkout/Stripe integration.
+8. OAuth style authentication (google/yahoo/twitter/facebook)
+9. Perhaps synchronize login with dokuwiki?
+
+
+
+

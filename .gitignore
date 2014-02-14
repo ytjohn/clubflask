@@ -34,7 +34,11 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
-.idea
+.idea/
+
+# Local databases
+*.db
+
 
 # Complexity
 output/*.html

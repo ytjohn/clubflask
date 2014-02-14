@@ -1,0 +1,105 @@
+
+
+Form:
+http://www.wpaares.org/html/join.html
+
+Fields:
+form name="LayoutRegion1FORM" action="/scripts/joinWPAares.php
+<input type="text" id="FormsEditField2" name="FirstName" size="21" maxlength="26" style="width: 164px; white-space: pre;
+FirstName
+LastName
+Call   # call sign
+Address
+City
+State
+ZipCode
+Email
+Phone1  # home phone
+Phone2 # work phone
+Ext # work phone extension
+Phone3 # cell phone
+License # license class of values: Tech/General/Extra/Advanced/Novice
+
+Capabilities:
+    name="SSB1" value="HF SSB"
+    name="CW1" value="HF CW"
+    name="FM1" value="HF FM"
+    name="DATA1" value="HF DATA"
+    name="PKT1" value="HF PKT"
+    name="NB1" value="HF NBEMS"
+    name="DS1" value="HF DSTAR"
+    name="WL1" value="HF WINLINK"
+    name="AP1" value="HF APRS"
+    name="MOB1" value="HF MOBILE"
+    name="SSB2" value="6M SSB"
+    name="CW2" value="6M CW"
+    name="FM2" value="6M FM"
+    name="DATA2" value="6M DATA"
+    name="PKT2" value="6M PKT"
+    name="NB2" value="6M NBEMS"
+    name="DS2" value="6M DSTAR"
+    name="WL2" value="6M WINLINK"
+    name="AP2" value="6M APRS"
+    name="MOB2" value="6M MOB"
+    name="SSB3" value="2M SSB"
+    name="CW3" value="2M CW"
+    name="FM3" value="2M FM"
+    name="DATA3" value="2M DATA"
+    name="PKT3" value="2M PKT"
+    name="NB3" value="2M NBEMS"
+    name="DS3" value="2M DSTAR"
+    name="WL3" value="2M WINLINK"
+    name="AP3" value="2M APRS"
+    name="MOB3" value="2M MOBILE"
+    name="SSB4" value="222 SSB"
+    name="CW4" value="222 CW"
+    name="FM4" value="222 FM"
+    name="DATA4" value="222 DATA"
+    name="PKT4" value="222 PKT"
+    name="NB4" value="222 NBEMS"
+    name="DS4" value="222 DSTAR"
+    name="WL4" value="222 WINLINK"
+    name="AP4" value="220 APRS"
+    name="MOB4" value="222 MOBILE"
+    name="SSB5" value="440 SSB"
+    name="CW5" value="440 CW"
+    name="FM5" value="440 FM"
+    name="DATA5" value="440 DATA"
+    name="PKT5" value="440 PKT"
+    name="NB5" value="440 NBEMS"
+    name="DS5" value="440 DSTAR"
+    name="WL5" value="440 WINLINK"
+    name="AP5" value="440 APRS"
+    name="MOB5" value="440 MOBILE"
+    name="SSB6" value="OTH SSB"
+    name="CW6" value="OTH CW"
+     name="FM6" value="OTH FM" s
+     name="DATA6" value="OTH DATA"
+      name="NB6" value="OTH NBEMS"
+      name="DS6" value="OTH DSTAR"
+      name="WL6" value="OTH WINLINK"
+      name="AP6" value="OTH APRS"
+      name="MOB6" value="OTH MOBILE"
+
+    <select id="FormsComboBox2" name="Power" style="height: 24px;">
+                      <option value="No Emerg Power" selected="selected">No Emergency Power</option>
+                      <option value="Emerg Power Avail">Emergency Power Available</option>
+     </select>
+
+
+GET: redirects to http://www.wpaares.org/html/join.html
+POST: http://wpaares.org/scripts/joinWPAares.php
+When you submit to wpaares, youget this back:
+
+<TR VALIGN="TOP" ALIGN="LEFT"><style> body { background-color: #ffffee; } </style> <TD HEIGHT="132" WIDTH="5285"><IMG ID="Picture2" HEIGHT="192" WIDTH="200" SRC="../assets/images/ares-cl.jpg" BORDER="0" ALT="pasrba" TITLE="WPA ARES"></TD></TR><TR VALIGN="TOP" ALIGN="LEFT"><TD></TD> <TD WIDTH="480" CLASS="TextObject"><P STYLE="margin-bottom: 0px;"><SPAN STYLE="font-size: 28px;">On-line Application System -- Results</SPAN></P> </TD></TR> <br /><br /><font color="black"><br /><br />Thank you,  John<br /><br />Your information was posted at 02/13/14 : 16:39:27<br />Thank you for your interest in joining Western Pennsylvania ARES.<br /> Your application will be forwarded to the Emergency Coordinator in your county for action.</font><br><br /><br /><br /><input type="button" value="<<  Click here to return to a previous page " onclick="history.go(-2);return true;">
+
+Out of that, we want to capture this:
+ "Your information was posted at 02/13/14 : 16:39:27"
+
+
+
+
+
+
+
+
