@@ -39,6 +39,8 @@ nosetests.xml
 # Local databases
 *.db
 
+# Generated migrations
+migrations/
 
 # Complexity
 output/*.html
