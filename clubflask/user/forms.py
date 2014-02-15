@@ -2,7 +2,7 @@ from flask_wtf import Form
 from wtforms import TextField, PasswordField, DateField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
-from .models import User
+from .models import User, Profile
 
 
 class RegisterForm(Form):
@@ -38,7 +38,23 @@ class RegisterForm(Form):
 
 
 class ProfileForm(Form):
-    birthday  = DateField('Your Birthday', format='%m/%d/%y')
-    callsign  = TextField('Call Sign')
+    first_name = TextField('First Name', validators=[DataRequired()])
+    last_name = TextField('Last Name', validators=[DataRequired()])
+    callsign  = TextField('Call Sign', validators=[Length(min=3, max=8)])
 
 
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        # self.callsign = None
+
+    def validate(self):
+        initial_validation = super(ProfileForm, self).validate()
+        if not initial_validation:
+            return False
+        callsign = Profile.query.filter_by(callsign=self.callsign.data).first()
+        if callsign:
+            self.callsign.errors.append("Callsign already registered by someone else? Could it be another you?")
+            return False
+ 
+        self.callsign = callsign
+        return True
