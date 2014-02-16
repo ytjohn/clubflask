@@ -4,7 +4,7 @@
 <div class="container-narrow">
   <h1>Register</h1>
     <br/>
-    <form id="registerForm" class="form form-register" method="POST" action="" role="form">
+    <form id="registerForm" class="form" method="POST" action="" role="form">
             {{ form.hidden_tag() }}
             <div class="form-group">
                 {{form.username.label}}
@@ -13,6 +13,14 @@
             <div class="form-group">
                 {{form.email.label}}
                 {{form.email(placeholder="Email", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.firstname.label}}
+                {{form.firstname(placeholder="First Name", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.lastname.label}}
+                {{form.lastname(placeholder="Last Name", class_="form-control")}}
             </div>
             <div class="form-group">
                 {{form.password.label}}

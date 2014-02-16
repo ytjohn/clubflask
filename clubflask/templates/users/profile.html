@@ -2,23 +2,77 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>Welcome {{ session.username }}</h1>
-    <h3>You can update your profile here..</h3>
+    <h3>Contact Information</h3>
     
-    <form id="profileForm" class="form form-profile" method="POST" action="" role="form">
+    <form id="profileForm" class="form" method="POST" action="" role="form">
             {{ form.hidden_tag() }}
-            <div class="form-group">
+            <div class="row">
+                <div class="col-xs-3">
                 {{form.first_name.label}}
-                {{form.first_name(placeholder="First Name", class_="form-control")}}
-            </div>
-            <div class="form-group">
+                {{form.first_name(placeholder="First Name", class="form-control")}}
+                </div>
+                <div class="col-xs-3">
                 {{form.last_name.label}}
-                {{form.last_name(placeholder="Last Name", class_="form-control")}}
-            </div>
-            <div class="form-group">
+                {{form.last_name(placeholder="Last Name", class="form-control")}}
+                </div>
+                
+                <div class="col-xs-2">
                 {{form.callsign.label}}
-                {{form.callsign(placeholder="Call Sign", class_="form-control")}}
+                {{form.callsign(placeholder="Call Sign", class="form-control")}}
+                </div>
+                <div class="col-xs-2">
+                {{form.licenseclass.label}}
+                {{form.licenseclass(placeholder="License Class", class="form-control")}}
+                </div>
             </div>
  
+            <div class="row">
+                <div class="col-xs-4">
+                {{form.address.label}}
+                {{form.address(placeholder='Address', class='form-control')}}
+                </div>
+                <div class="col-xs-2">
+                    {{form.mobilephone.label}}
+                    {{form.mobilephone(placeholder="Mobile Phone", class="form-control")}}
+                </div>
+                <div class="col-xs-2">
+                    {{form.homephone.label}}
+                    {{form.homephone(placeholder="Home Phone", class="form-control")}}
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    {{form.city.label}}
+                    {{form.city(placeholder='City', class='form-control')}}
+                </div>
+                <div class="col-xs-1">
+                    {{form.state.label}}
+                    {{form.state(placeholder='State', class='form-control')}} 
+                </div>
+                <div class="col-xs-1">
+                    {{form.zip.label}}
+                    {{form.zip(placeholder='Zip Code', class='form-control')}}
+                </div>
+                <div class="col-xs-2">
+                    {{form.county.label}}
+                    {{form.county(placeholder='County', class='form-control')}}
+                </div>
+            </div>
+                
+            <div class="row">
+                <div class="form-group">
+                <hr />
+                    {{form.addtomailinglist(placeholder="Add to mailing list?")}} Can we share your contact information with the club members? 
+               <br />
+                    
+                  {{form.addtomailinglist(placeholder="Add to mailing list?")}}  Can we add you to the BCAR's e-mail mailing list (low traffic)? <br />
+                    
+                {{form.enrollinwpaares(placeholder="Enroll in WPA ARES")}} Should we enroll you in WPA ARES on your behalf? We can only do this if you have a license. All contact information and capabilities need to be filled out and will be shared with WPA ARES. 
+                    
+                    
+                </div>
+            </div>
 
             <p><input class="btn btn-default btn-submit" type="submit" value="Update"></p>
     </form>

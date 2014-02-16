@@ -35,6 +35,7 @@ nosetests.xml
 .project
 .pydevproject
 .idea/
+*.swp
 
 # Local databases
 *.db

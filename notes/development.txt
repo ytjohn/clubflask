@@ -34,4 +34,13 @@ be able to change one of my models, then run `manage.py db migrate` followed by 
 columns, the migrate fails with ghastly python errors. I end up having to go into sqlite and drop/recreate the tables by
 hand. However, when I do this, the migrate tool no longer understands the database and freaks out.
 
-So I really can't upgrade my database automatically using this. I can run `manage.py db upgrade --sql` and that
+So I really can't upgrade my database automatically using this.
+
+UPDATE: I worked out that I can work around this: https://github.com/miguelgrinberg/Flask-Migrate/issues/17
+
+Next, I want to try and get Flask-Admin working. https://flask-admin.readthedocs.org/en/latest/
+
+Looking at the authentication snippet (https://flask-admin.readthedocs.org/en/latest/django_migration/#authentication), I
+believe I want to be able to read the is_admin section of the users table for the logged in user.
+
+

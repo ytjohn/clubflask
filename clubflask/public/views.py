@@ -5,7 +5,7 @@ from flask import (Blueprint, request, render_template, flash, url_for,
 from flask.ext.login import login_user, login_required, logout_user
 
 from clubflask.extensions import login_manager
-from clubflask.user.models import User
+from clubflask.user.models import User, Profile
 from clubflask.public.forms import LoginForm
 from clubflask.user.forms import RegisterForm
 from clubflask.utils import flash_errors
@@ -47,6 +47,13 @@ def register():
                         email=form.email.data,
                         password=form.password.data,
                         active=True)
+        print new_user
+        print new_user.id
+        new_profile = Profile.create(user_id=new_user.id,
+                              first_name=form.firstname.data,
+                              last_name=form.lastname.data
+                              )
+        
         flash("Thank you for registering. You can now log in.", 'success')
         return redirect(url_for('public.home'))
     else:

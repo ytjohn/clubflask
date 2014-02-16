@@ -16,6 +16,7 @@ class User(UserMixin, CRUDMixin, db.Model):
     created_at = db.Column(db.DateTime(), nullable=False)
     active = db.Column(db.Boolean())
     is_admin = db.Column(db.Boolean())
+    is_verified = db.Column(db.Boolean())
     profile = db.relationship('Profile', backref='user',
                                 lazy='dynamic')
 
@@ -24,13 +25,14 @@ class User(UserMixin, CRUDMixin, db.Model):
     # last_name = db.Column(db.String(30), nullable=True)
 
     def __init__(self, username=None, email=None, password=None,
-                 active=False, is_admin=False):
+                 active=False, is_verified=False, is_admin=False):
         self.username = username
         self.email = email
         if password:
             self.set_password(password)
         self.active = active
         self.is_admin = is_admin
+        self.is_verified = is_verified
         self.created_at = dt.datetime.utcnow()
 
 
@@ -68,7 +70,8 @@ class Profile(CRUDMixin, db.Model):
     usercapabilities = db.relationship('UserCapabilities', backref='profile',
                                 lazy='dynamic')
 
-    def __init__(self, first_name=None, last_name=None):
+    def __init__(self, user_id=None, first_name=None, last_name=None):
+        self.user_id = user_id  
         self.first_name = first_name
         self.last_name = last_name
 
