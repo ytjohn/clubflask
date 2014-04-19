@@ -1,7 +1,9 @@
 from flask_wtf import Form
 from wtforms import TextField, PasswordField, DateField, TextAreaField, SelectField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional
-from clubflask.user.models import Privacy 
+# from clubflask.user.models import Privacy 
+#from clubflask.user.models import User, Profile, Privacy
+#from clubflask.database import db    
 
 class RegisterForm(Form):
     username = TextField('Username',
@@ -50,14 +52,16 @@ class ProfileForm(Form):
     state = TextField('State')
     zip = TextField('Zip Code', validators=[Optional(), Length(min=5, max=5)])
     county = TextField('County')
+    # These choices should come from somewhere else - the db.
     licenseclass = SelectField(u'License Class', choices=[('',''),
         ('Tech', 'Technician'), ('General', 'General'),
         ('Extra', 'Extra'), ('Novice', 'Novice'), ('Advanced', 'Advanced')], validators=[Optional()])
 
     # These fields are in the privacy table. Let's pull in the current record
+    
     # to set defaults.
-    privacyoptions = Privacy.query.filter_by(user_id=Form.user_id).first()
-    print "prid: %s" % prid.id
+    #privacyoptions = Privacy.query.filter_by(user_id=Form.user_id).first()
+    #print "prid: %s" % prid.id
 
     addtomailinglist = BooleanField('Add to mailing list?', default=True)
     sharewithclub = BooleanField('Share contact information with club?')
@@ -72,3 +76,7 @@ class ProfileForm(Form):
         if not initial_validation:
             return False
         return True
+
+    
+    
+    

@@ -2,10 +2,10 @@
 from flask import (Blueprint, request, render_template, flash, url_for,
                     redirect, session)
 from flask.ext.login import login_required, current_user
+from clubflask.user.models import User, Profile, Attributes, Privacy
 from clubflask.user.forms import ProfileForm
 from clubflask.utils import flash_errors
-from clubflask.user.models import User, Profile, Privacy
-from clubflask.database import db
+
 
 blueprint = Blueprint("user", __name__, url_prefix='/users',
                         static_folder="../static")
@@ -27,9 +27,17 @@ def profile():
     if not privacyoptions:
         privacyoptions = Privacy.create(user_id=user_id)
     
-    form = ProfileForm(request.form, userprofile, csrf_enabled=True)
+    # combined = dict(userprofile.items() + privacyoptions.items())
+    print "userprofile", userprofile
+    print "privacyoptions", privacyoptions
+    form1 = ProfileForm(request.form, userprofile, csrf_enabled=True)
+    # form2 = ProfileForm2(request.form, privacyoptions)
+    form = form1
     
     # mix in privacy privacyoptions
+    print "wpaares", form.enrollinwpaares.data
+    print "addto", form.addtomailinglist.data
+    print "sharewithclub", form.sharewithclub.data
     # form.enrollinwpaares.data = privacyoptions.enrollinwpaares   
     # form.addtomailinglist.data = privacyoptions.addtomailinglist
     # form.sharewithclub.data = privacyoptions.sharewithclub
@@ -65,3 +73,4 @@ def profile():
     else:
         flash_errors(form)
     return render_template('users/profile.html', form=form)
+    

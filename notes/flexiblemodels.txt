@@ -1,0 +1,14 @@
+    
+lazyconf https://github.com/fmd/lazyconf
+
+Attributes table
+    id, shortname (unique), description, placeholder
+    |id|shortname|description|placeholder
+
+UserAttriutes table
+    user_id, attribute_name (shortname), value
+
+Each application can provide a json file defining attributes.
+
+A "setup" button in the app to point to the database.
+Initialize database.

@@ -5,7 +5,7 @@ from flask import (Blueprint, request, render_template, flash, url_for,
 from flask.ext.login import login_user, login_required, logout_user
 
 from clubflask.extensions import login_manager
-from clubflask.user.models import User, Profile
+from clubflask.user.models import User, Profile, Attributes
 from clubflask.public.forms import LoginForm
 from clubflask.user.forms import RegisterForm
 from clubflask.utils import flash_errors
@@ -20,6 +20,10 @@ def load_user(id):
 
 @blueprint.route("/", methods=["GET", "POST"])
 def home():
+    
+    # Can we pre-load the attributes?
+    # loadAttributes()
+    
     form = LoginForm(request.form)
     # Handle logging in
     if request.method == 'POST':
@@ -65,4 +69,16 @@ def about():
     form = LoginForm(request.form)
     return render_template("public/about.html", form=form)
 
+
+def get_or_create(model, defaults=None, **kwargs):
+    instance = db.session.query(model).filter_by(**kwargs).first()
+    if instance:
+        return instance, False
+    else:
+        params = dict((k, v) for k, v in kwargs.iteritems() if not isinstance(v, ClauseElement))
+        params.update(defaults)
+        instance = model(**params)
+        db.session.add(instance)
+        db.session.commit(instance)
+        return instance, True
 

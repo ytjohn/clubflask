@@ -45,6 +45,37 @@ class User(UserMixin, CRUDMixin, db.Model):
     def __repr__(self):
         return '<User "{username}">'.format(username=self.username)
 
+
+class Attributes(CRUDMixin, db.Model):
+    """ This table will define attributes that can be associated with
+    a user. """
+    
+    __tablename__ = 'attributes'
+    
+    shortname = db.Column(db.String(10), nullable=False, unique=True)
+    description = db.Column(db.String(80), nullable=False)
+    placeholder = db.Column(db.String(30), nullable=True)
+        
+    def __init__(self):
+        """ Let's pre-load all the attributes """
+    
+        if not Attributes.query.filter_by(id=1).first():
+            Attributes.create(id=1, shortname='firstname', 
+                                description='First Name')
+        if not Attributes.query.filter_by(id=2).first():
+            Attributes.create(id=2, shortname='lastname', 
+                                description='Last Name')   
+        db.session.commit()
+        
+class UserAttributes(CRUDMixin, db.Model):
+    """ This table will contain a list of attributes and values associated
+    with a user. """
+    
+    __tablename__ = 'userattributes'
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    attribute_id = db.Column(db.Integer, db.ForeignKey('attributes.id'),                            nullable=False)
+    value = db.Column(db.String(200), nullable=False)
+    
 class Profile(CRUDMixin, db.Model):
 
     __tablename__ = 'profiles'
